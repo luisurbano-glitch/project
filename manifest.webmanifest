@@ -1,0 +1,12 @@
+{
+  "name": "Ponto Eletrônico",
+  "short_name": "Ponto",
+  "description": "Sistema de Controle de Ponto Eletrônico",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#ffffff",
+  "orientation": "any",
+  "icons": []
+}
