@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta
+    name="description"
+    content="Sistema de Controle de Ponto Eletrônico"
+  >
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+
+  <title>Ponto Eletrônico</title>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <i data-lucide="clock-3"></i>
+      </div>
+
+      <div>
+        <strong>Ponto Eletrônico</strong>
+        <span id="terminal-name">Terminal não configurado</span>
+      </div>
+    </div>
+
+    <div class="system-status">
+      <div id="network-status" class="status status-online">
+        <i data-lucide="wifi"></i>
+        <span>Online</span>
+      </div>
+
+      <div id="printer-status" class="status status-online">
+        <i data-lucide="printer"></i>
+        <span>Impressora operacional</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="clock-panel">
+      <span class="eyebrow">HORÁRIO ATUAL</span>
+      <time id="current-time">--:--:--</time>
+      <span id="current-date">--/--/----</span>
+    </section>
+
+    <section class="attendance-card">
+      <div class="card-header">
+        <div>
+          <span class="eyebrow">REGISTRO DE PONTO</span>
+          <h1>Identifique-se para registrar seu ponto</h1>
+        </div>
+
+        <div class="security-badge">
+          <i data-lucide="shield-check"></i>
+          <span>Registro protegido</span>
+        </div>
+      </div>
+
+      <div class="employee-input">
+        <label for="employee-code">Matrícula ou código do funcionário</label>
+
+        <div class="input-row">
+          <div class="input-wrapper">
+            <i data-lucide="user"></i>
+            <input
+              id="employee-code"
+              type="text"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="Digite sua matrícula"
+              maxlength="32"
+            >
+          </div>
+
+          <button id="continue-button" class="button button-primary">
+            <span>Continuar</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="authentication-options">
+        <button class="auth-option" id="rfid-button" type="button">
+          <i data-lucide="radio"></i>
+          <span>
+            <strong>Cartão RFID</strong>
+            <small>Aproxime seu cartão do leitor</small>
+          </span>
+        </button>
+
+        <button class="auth-option" id="camera-button" type="button">
+          <i data-lucide="camera"></i>
+          <span>
+            <strong>Identificação por câmera</strong>
+            <small>Usar câmera do terminal</small>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section class="event-panel" aria-label="Eventos de ponto">
+      <div class="event event-disabled">
+        <div class="event-icon">
+          <i data-lucide="log-in"></i>
+        </div>
+        <div>
+          <strong>Entrada</strong>
+          <span>Aguardando identificação</span>
+        </div>
+      </div>
+
+      <div class="event event-disabled">
+        <div class="event-icon">
+          <i data-lucide="coffee"></i>
+        </div>
+        <div>
+          <strong>Saída para intervalo</strong>
+          <span>Aguardando identificação</span>
+        </div>
+      </div>
+
+      <div class="event event-disabled">
+        <div class="event-icon">
+          <i data-lucide="rotate-ccw"></i>
+        </div>
+        <div>
+          <strong>Retorno do intervalo</strong>
+          <span>Aguardando identificação</span>
+        </div>
+      </div>
+
+      <div class="event event-disabled">
+        <div class="event-icon">
+          <i data-lucide="log-out"></i>
+        </div>
+        <div>
+          <strong>Saída do expediente</strong>
+          <span>Aguardando identificação</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="notification" class="notification hidden" role="status">
+    <i data-lucide="info"></i>
+    <span id="notification-message"></span>
+  </div>
+
+  <div id="camera-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow">AUTENTICAÇÃO</span>
+          <h2>Confirmação por câmera</h2>
+        </div>
+
+        <button id="close-camera" class="icon-button" aria-label="Fechar">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="camera-container">
+        <video id="camera-preview" autoplay playsinline></video>
+      </div>
+
+      <div class="modal-actions">
+        <button id="capture-button" class="button button-primary">
+          <i data-lucide="camera"></i>
+          Capturar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
